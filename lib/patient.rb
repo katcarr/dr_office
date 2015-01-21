@@ -5,6 +5,7 @@ class Patient
     @name = attributes.fetch(:name)
     @birthdate = attributes.fetch(:birthdate)
     @id = attributes.fetch(:id)
+    
   end
 
   define_method(:==) do |patient_to_compare|
@@ -27,4 +28,7 @@ class Patient
     result = DB.exec("INSERT INTO patients (name, birthdate) VALUES ('#{@name}', '#{@birthdate}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
+
+
+
 end

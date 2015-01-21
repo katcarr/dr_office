@@ -41,4 +41,27 @@ describe("Doctor") do
     end
   end
 
+  describe("#list_patients") do
+    it("will add a patient to a doctor") do
+      test_dr = Doctor.new({:name => "Dr. Brown", :specialty => "skin", :id => nil})
+      test_dr.save
+      test_patient = Patient.new({:name => "Hazel", :birthdate => "2010-10-10", :id => nil})
+      test_patient.save
+      test_patient2 = Patient.new({:name => "Ash", :birthdate => "2010-10-10", :id => nil})
+      test_patient2.save
+      test_dr.add_patient(test_patient.id)
+      expect(test_dr.list_patients).to(eq([test_patient, test_patient2]))
+    end
+  end
+
+  describe("#add_patient") do
+    it("will add a patient to a doctor") do
+      test_dr = Doctor.new({:name => "Dr. Brown", :specialty => "skin", :id => nil})
+      test_dr.save
+      test_patient = Patient.new({:name => "Hazel", :birthdate => "2010-10-10", :id => nil})
+      test_patient.save
+      test_dr.add_patient(test_patient)
+      expect(test_dr.list_patients).to(eq([test_patient]))
+    end
+  end
 end
